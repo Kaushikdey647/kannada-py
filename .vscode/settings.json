@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "lexer.h": "c",
+        "common.h": "c"
+    }
+}
