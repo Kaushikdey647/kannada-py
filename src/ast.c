@@ -5,16 +5,14 @@
 #include "../include/common.h"
 
 ASTNode *create_ast_node(ASTNodeType type) {
-    ASTNode *node = (ASTNode *)safe_malloc(sizeof(ASTNode));
+    ASTNode *node = safe_malloc(sizeof(ASTNode));
     node->type = type;
-    node->line = -1;  // Line number can be set later
+    node->line = 0;  // Line number should be set by the parser
     return node;
 }
 
 void free_ast(ASTNode *node) {
-    if (node == NULL) {
-        return;
-    }
+    if (node == NULL) return;
 
     switch (node->type) {
         case AST_PROGRAM:
@@ -50,12 +48,11 @@ void free_ast(ASTNode *node) {
         case AST_VARIABLE:
             free(node->data.variable.name);
             break;
-        case AST_NUMBER:
         case AST_STRING:
-        case AST_BOOLEAN:
-            if (node->type == AST_STRING) {
-                free(node->data.string);
-            }
+            free(node->data.string);
+            break;
+        default:
+            // AST_NUMBER and AST_BOOLEAN don't need additional freeing
             break;
     }
 
@@ -144,9 +141,7 @@ ASTNode *create_boolean_node(bool value) {
 }
 
 void print_ast(ASTNode *node, int indent) {
-    if (node == NULL) {
-        return;
-    }
+    if (node == NULL) return;
 
     for (int i = 0; i < indent; i++) {
         printf("  ");
@@ -154,48 +149,47 @@ void print_ast(ASTNode *node, int indent) {
 
     switch (node->type) {
         case AST_PROGRAM:
-            printf("Program:\n");
+            printf("Program (%d statements)\n", node->data.program.count);
             for (int i = 0; i < node->data.program.count; i++) {
                 print_ast(node->data.program.statements[i], indent + 1);
             }
             break;
         case AST_BLOCK:
-            printf("Block:\n");
+            printf("Block (%d statements)\n", node->data.block.count);
             for (int i = 0; i < node->data.block.count; i++) {
                 print_ast(node->data.block.statements[i], indent + 1);
             }
             break;
         case AST_IF:
-            printf("If:\n");
+            printf("If\n");
             print_ast(node->data.if_stmt.condition, indent + 1);
-            printf("%*sThen:\n", indent * 2, "");
             print_ast(node->data.if_stmt.if_body, indent + 1);
-            if (node->data.if_stmt.else_body != NULL) {
-                printf("%*sElse:\n", indent * 2, "");
+            if (node->data.if_stmt.else_body) {
+                for (int i = 0; i < indent; i++) printf("  ");
+                printf("Else\n");
                 print_ast(node->data.if_stmt.else_body, indent + 1);
             }
             break;
         case AST_WHILE:
-            printf("While:\n");
+            printf("While\n");
             print_ast(node->data.while_loop.condition, indent + 1);
-            printf("%*sDo:\n", indent * 2, "");
             print_ast(node->data.while_loop.body, indent + 1);
             break;
         case AST_PRINT:
-            printf("Print:\n");
+            printf("Print\n");
             print_ast(node->data.print_stmt.expression, indent + 1);
             break;
         case AST_ASSIGN:
-            printf("Assign: %s =\n", node->data.assign.name);
+            printf("Assign: %s\n", node->data.assign.name);
             print_ast(node->data.assign.value, indent + 1);
             break;
         case AST_BINARY_OP:
-            printf("BinaryOp: %s\n", token_type_to_string(node->data.binary_op.op));
+            printf("Binary Op: %d\n", node->data.binary_op.op);
             print_ast(node->data.binary_op.left, indent + 1);
             print_ast(node->data.binary_op.right, indent + 1);
             break;
         case AST_UNARY_OP:
-            printf("UnaryOp: %s\n", token_type_to_string(node->data.unary_op.op));
+            printf("Unary Op: %d\n", node->data.unary_op.op);
             print_ast(node->data.unary_op.operand, indent + 1);
             break;
         case AST_VARIABLE:
