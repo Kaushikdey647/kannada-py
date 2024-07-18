@@ -78,9 +78,7 @@ Example:
 
 ### Project Status
 
-There are some parts completely implemented, and some parts that still needs fixing, they just have been copied from claude. They need to be refined, debugged and tested. Here's a summary of the current status of the project:
-
-#### Implemented Components:
+The following components have been implemented and are working:
 
 1. **Lexer (Tokenizer)**
    - Recognizes Kannada keywords, identifiers, and literals
@@ -91,11 +89,13 @@ There are some parts completely implemented, and some parts that still needs fix
 3. **Abstract Syntax Tree (AST)**
    - Defines node structures for various language constructs
    - Includes utilities for creating and manipulating AST nodes
-4. **Main Compiler Driver**
+4. **Symbol Table**
+   - Management of identifiers and their attributes
+5. **Main Compiler Driver**
    - Coordinates lexing and parsing phases
    - Provides basic error reporting
 
-#### Components Not Yet Implemented:
+### Components Not Yet Implemented
 
 1. **Semantic Analyzer**
    - Type checking
@@ -107,11 +107,9 @@ There are some parts completely implemented, and some parts that still needs fix
    - Optimization passes on the intermediate representation
 4. **Code Generator**
    - Generation of target machine code or bytecode
-5. **Symbol Table**
-   - Management of identifiers and their attributes
-6. **Error Handler**
+5. **Error Handler**
    - Comprehensive error reporting and recovery mechanisms
-7. **Standard Library**
+6. **Standard Library**
    - Implementation of basic I/O, math, and other standard functions in Kannada
 
 ### Roadmap
