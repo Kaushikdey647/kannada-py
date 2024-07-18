@@ -76,6 +76,54 @@ Example:
     ಮುದ್ರಿಸು("ಸಂಖ್ಯೆ ೫ಕ್ಕಿಂತ ಚಿಕ್ಕದು ಅಥವಾ ಸಮ")
 ```
 
+### Project Status
+
+There are some parts completely implemented, and some parts that still needs fixing, they just have been copied from claude. They need to be refined, debugged and tested. Here's a summary of the current status of the project:
+
+#### Implemented Components:
+
+1. **Lexer (Tokenizer)**
+   - Recognizes Kannada keywords, identifiers, and literals
+   - Handles basic operators and punctuation
+2. **Parser**
+   - Constructs Abstract Syntax Tree (AST) from tokens
+   - Supports basic language constructs (if-else, while loops, assignments)
+3. **Abstract Syntax Tree (AST)**
+   - Defines node structures for various language constructs
+   - Includes utilities for creating and manipulating AST nodes
+4. **Main Compiler Driver**
+   - Coordinates lexing and parsing phases
+   - Provides basic error reporting
+
+#### Components Not Yet Implemented:
+
+1. **Semantic Analyzer**
+   - Type checking
+   - Scope analysis
+   - Error detection for semantic issues
+2. **Intermediate Code Generator**
+   - Translation of AST to an intermediate representation
+3. **Code Optimizer**
+   - Optimization passes on the intermediate representation
+4. **Code Generator**
+   - Generation of target machine code or bytecode
+5. **Symbol Table**
+   - Management of identifiers and their attributes
+6. **Error Handler**
+   - Comprehensive error reporting and recovery mechanisms
+7. **Standard Library**
+   - Implementation of basic I/O, math, and other standard functions in Kannada
+
+### Roadmap
+Our next steps in the development of the Kannada Python Compiler include:
+1. Implementing the Semantic Analyzer to catch semantic errors and perform type checking.
+2. Developing an Intermediate Code Generator to translate the AST into a lower-level representation.
+3. Creating a basic Code Generator to produce executable output.
+4. Expanding the language features to include functions, modules, and more complex data structures.
+5. Developing a standard library with common functions and utilities accessible in Kannada.
+
+We welcome contributions in any of these areas! Check our issues page for specific tasks or propose new features.
+
 ### Contributing
 
 We welcome contributions to the Kannada Python Compiler project! Whether it's adding new features, improving documentation, or reporting bugs, your help is appreciated. Please feel free to submit pull requests or open issues on our GitHub repository.
@@ -86,7 +134,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Acknowledgments
 
-- Thanks to all contributors who have helped shape this project.
+- Thanks to all contributors who have helped shape this project. Especially, ME... Kaushik Dey!
 - Special thanks to the Kannada-speaking community for their support and feedback.
 
 Happy coding in Kannada! ಸಂತೋಷದ ಕೋಡಿಂಗ್!
