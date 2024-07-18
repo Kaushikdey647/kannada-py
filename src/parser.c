@@ -121,7 +121,7 @@ ASTNode *parse_assign_statement(Parser *parser) {
     ASTNode *value = parse_expression(parser);
     consume(parser, TOKEN_SEMICOLON, "Expected ';' after assignment");
 
-    return create_assign_node(identifier->lexeme, value);
+    return create_assign_node(identifier->value.string, value);
 }
 
 ASTNode *parse_expression(Parser *parser) {
@@ -165,13 +165,13 @@ ASTNode *parse_primary(Parser *parser) {
         case TOKEN_NUMBER:
             return create_number_node(token->value.number);
         case TOKEN_STRING:
-            return create_string_node(token->lexeme);
+            return create_string_node(token->value.string);
         case TOKEN_TRUE:
             return create_boolean_node(true);
         case TOKEN_FALSE:
             return create_boolean_node(false);
         case TOKEN_IDENTIFIER:
-            return create_variable_node(token->lexeme);
+            return create_variable_node(token->value.string);
         case TOKEN_LPAREN:
             {
                 ASTNode *expression = parse_expression(parser);
