@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "lexer.h": "c",
-        "common.h": "c"
+        "common.h": "c",
+        "compiler.h": "c",
+        "parser.h": "c",
+        "semantic_analyzer.h": "c"
     }
 }

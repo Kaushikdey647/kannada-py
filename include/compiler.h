@@ -5,7 +5,7 @@
 #include "lexer.h"
 #include "parser.h"
 #include "semantic_analyzer.h"
-#include "code_generator.h"
+#include "codegen.h"
 #include "symbol_table.h"
 
 // Function prototypes for the main compiler driver

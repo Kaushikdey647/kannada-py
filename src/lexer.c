@@ -26,6 +26,37 @@ static const struct {
     {NULL, TOKEN_EOF}
 };
 
+const char *token_type_to_string(TokenType type) {
+    switch (type) {
+        case TOKEN_EOF: return "TOKEN_EOF";
+        case TOKEN_ERROR: return "TOKEN_ERROR";
+        case TOKEN_IDENTIFIER: return "TOKEN_IDENTIFIER";
+        case TOKEN_NUMBER: return "TOKEN_NUMBER";
+        case TOKEN_STRING: return "TOKEN_STRING";
+        case TOKEN_IF: return "TOKEN_IF";
+        case TOKEN_ELSE: return "TOKEN_ELSE";
+        case TOKEN_WHILE: return "TOKEN_WHILE";
+        case TOKEN_PRINT: return "TOKEN_PRINT";
+        case TOKEN_TRUE: return "TOKEN_TRUE";
+        case TOKEN_FALSE: return "TOKEN_FALSE";
+        case TOKEN_NONE: return "TOKEN_NONE";
+        case TOKEN_PLUS: return "TOKEN_PLUS";
+        case TOKEN_MINUS: return "TOKEN_MINUS";
+        case TOKEN_MULTIPLY: return "TOKEN_MULTIPLY";
+        case TOKEN_DIVIDE: return "TOKEN_DIVIDE";
+        case TOKEN_ASSIGN: return "TOKEN_ASSIGN";
+        case TOKEN_STAR: return "TOKEN_STAR";
+        case TOKEN_SLASH: return "TOKEN_SLASH";
+        case TOKEN_EQUAL: return "TOKEN_EQUAL";
+        case TOKEN_LPAREN: return "TOKEN_LPAREN";
+        case TOKEN_RPAREN: return "TOKEN_RPAREN";
+        case TOKEN_LBRACE: return "TOKEN_LBRACE";
+        case TOKEN_RBRACE: return "TOKEN_RBRACE";
+        case TOKEN_SEMICOLON: return "TOKEN_SEMICOLON";
+        default: return "UNKNOWN_TOKEN";
+    }
+}
+
 void init_lexer(const char *input) {
     current_pos = (char *)input;
     line_number = 1;

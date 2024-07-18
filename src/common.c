@@ -33,20 +33,20 @@ char *safe_strdup(const char *str) {
 }
 
 // Utility functions for Kannada character handling
-bool is_kannada_digit(uint32_t ch) {
-    return (ch >= 0x0CE6 && ch <= 0x0CEF);
-}
+// bool is_kannada_digit(uint32_t ch) {
+//     return (ch >= 0x0CE6 && ch <= 0x0CEF);
+// }
 
-bool is_kannada_letter(uint32_t ch) {
-    return ((ch >= 0x0C80 && ch <= 0x0CFF) || (ch >= 0x1CD0 && ch <= 0x1CFA));
-}
+// bool is_kannada_letter(uint32_t ch) {
+//     return ((ch >= 0x0C80 && ch <= 0x0CFF) || (ch >= 0x1CD0 && ch <= 0x1CFA));
+// }
 
-int kannada_digit_to_int(uint32_t ch) {
-    if (is_kannada_digit(ch)) {
-        return ch - 0x0CE6;
-    }
-    return -1;  // Invalid Kannada digit
-}
+// int kannada_digit_to_int(uint32_t ch) {
+//     if (is_kannada_digit(ch)) {
+//         return ch - 0x0CE6;
+//     }
+//     return -1;  // Invalid Kannada digit
+// }
 
 // UTF-8 handling functions
 size_t utf8_strlen(const char *str) {

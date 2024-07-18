@@ -35,9 +35,9 @@ void *safe_realloc(void *ptr, size_t size);
 char *safe_strdup(const char *str);
 
 // Utility functions
-bool is_kannada_digit(uint32_t ch);
-bool is_kannada_letter(uint32_t ch);
-int kannada_digit_to_int(uint32_t ch);
+// bool is_kannada_digit(uint32_t ch);
+// bool is_kannada_letter(uint32_t ch);
+// int kannada_digit_to_int(uint32_t ch);
 
 // UTF-8 handling
 size_t utf8_strlen(const char *str);
