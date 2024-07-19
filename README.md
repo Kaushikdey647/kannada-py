@@ -1,6 +1,6 @@
-# Kannada Python Compiler
+# Kannada-Py
 
-## ಕನ್ನಡ ಪೈಥಾನ್ ಕಂಪೈಲರ್
+## ಪೈಥಾನ್ ಕಂಪೈಲರ್
 
 Welcome to the Kannada Python Compiler project! This unique compiler allows you to write Python-like code using Kannada keywords and identifiers, bringing programming closer to Kannada speakers.
 
