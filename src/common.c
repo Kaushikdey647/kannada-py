@@ -1,3 +1,4 @@
+// common.c
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -24,10 +25,17 @@ void *safe_realloc(void *ptr, size_t size) {
 }
 
 char *safe_strdup(const char *str) {
-    char *dup = strdup(str);
+    if (str == NULL) {
+        return NULL;
+    }
+    size_t len = strlen(str) + 1;
+    char *dup = safe_malloc(len);
     if (dup == NULL) {
         fprintf(stderr, "Error: String duplication failed\n");
         exit(EXIT_FAILURE);
+    }
+    if (dup){
+        memcpy(dup, str, len);
     }
     return dup;
 }

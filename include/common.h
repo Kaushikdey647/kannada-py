@@ -8,6 +8,7 @@
 // Version information
 #define COMPILER_VERSION "0.1.0"
 #define COMPILER_NAME "KannadaPython"
+#define _POSIX_C_SOURCE 200809L // Define POSIX source version for strdup
 
 // Maximum lengths
 #define MAX_IDENTIFIER_LENGTH 256

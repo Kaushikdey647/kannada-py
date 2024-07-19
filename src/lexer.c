@@ -7,6 +7,7 @@
 
 #define MAX_IDENTIFIER_LENGTH 256
 #define MAX_NUMBER_LENGTH 100
+#define _POSIX_C_SOURCE 200809L  // This enables strdup in string.h
 
 static char *current_pos;
 static int line_number = 1;
@@ -62,18 +63,18 @@ void init_lexer(const char *input) {
     line_number = 1;
 }
 
-static int is_kannada_digit(char c) {
+static bool is_kannada_digit(uint32_t c) {
     // Kannada digits range from U+0CE6 to U+0CEF
-    return (c >= 0xCE && c <= 0xCF && (unsigned char)c >= 0xA6);
+    return (c >= 0x0CE6 && c <= 0x0CEF);
 }
 
-static int kannada_digit_to_int(char c) {
-    return c - 0xE6;
+static int kannada_digit_to_int(uint32_t c) {
+    return c - 0x0CE6;
 }
 
-static int is_kannada_letter(char c) {
-    // Simplified check for Kannada letters
-    return (c >= 0xC8 && c <= 0xCF);
+static bool is_kannada_letter(uint32_t c) {
+    // Kannada letters range from U+0C80 to U+0CFF
+    return (c >= 0x0C80 && c <= 0x0CFF);
 }
 
 static void skip_whitespace() {
@@ -111,7 +112,8 @@ static Token *tokenize_number() {
 static Token *tokenize_identifier_or_keyword() {
     char identifier[MAX_IDENTIFIER_LENGTH] = {0};
     int i = 0;
-    while ((is_kannada_letter(*current_pos) || is_kannada_digit(*current_pos)) && i < MAX_IDENTIFIER_LENGTH - 1) {
+    const char *temp = current_pos;
+    while ((is_kannada_letter(utf8_nextchar(&temp)) || is_kannada_digit(utf8_nextchar(&temp))) && i < MAX_IDENTIFIER_LENGTH - 1) {
         identifier[i++] = *current_pos++;
     }
     identifier[i] = '\0';
@@ -123,7 +125,7 @@ static Token *tokenize_identifier_or_keyword() {
     }
 
     Token *token = create_token(TOKEN_IDENTIFIER);
-    token->value.string = strdup(identifier);
+    token->value.string = safe_strdup(identifier);
     return token;
 }
 

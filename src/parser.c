@@ -3,7 +3,7 @@
 #include "../include/parser.h"
 #include "../include/common.h"
 
-Parser *create_parser(Token *tokens, int length) {
+Parser *create_parser(Token **tokens, int length) {
     Parser *parser = (Parser *)safe_malloc(sizeof(Parser));
     parser->tokens = tokens;
     parser->current = 0;
@@ -17,14 +17,14 @@ void free_parser(Parser *parser) {
 
 Token *advance(Parser *parser) {
     if (parser->current < parser->length) {
-        return &parser->tokens[parser->current++];
+        return parser->tokens[parser->current++];
     }
     return NULL;
 }
 
 Token *peek(Parser *parser) {
     if (parser->current < parser->length) {
-        return &parser->tokens[parser->current];
+        return parser->tokens[parser->current];
     }
     return NULL;
 }

@@ -3,8 +3,6 @@
 #include <string.h>
 #include "../include/semantic_analyzer.h"
 #include "../include/common.h"
-#include "../include/ast.h"
-#include "../include/symbol_table.h"
 
 // Function to perform semantic analysis on the AST
 void semantic_analysis(ASTNode *ast, SymbolTable *symbol_table) {

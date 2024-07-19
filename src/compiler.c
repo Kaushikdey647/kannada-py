@@ -1,14 +1,30 @@
+// compiler.c
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/compiler.h"
 #include "../include/common.h"
+#include "../include/semantic_analyzer.h"
 
 void compile(const char *source_code, FILE *output) {
     // Initialize the lexer
     init_lexer(source_code);
 
+    // Tokenize the input
+    Token **tokens = NULL;
+    int token_count = 0;
+    Token *token;
+    do {
+        token = get_next_token();
+        token_count++;
+        tokens = (Token **)safe_realloc(tokens, token_count * sizeof(Token *));
+        tokens[token_count - 1] = token;
+    } while (token->type != TOKEN_EOF);
+
+    // Create a parser
+    Parser *parser = create_parser(tokens, token_count);
+
     // Parse the source code to generate the AST
-    ASTNode *ast = parse();
+    ASTNode *ast = parse_program(parser);
 
     // Create a symbol table
     SymbolTable *symbol_table = create_symbol_table(128);
@@ -22,6 +38,11 @@ void compile(const char *source_code, FILE *output) {
     // Free resources
     free_ast(ast);
     free_symbol_table(symbol_table);
+    free_parser(parser);
+    for (int i = 0; i < token_count; i++) {
+        free_token(tokens[i]);
+    }
+    free(tokens);
 }
 
 int main(int argc, char *argv[]) {

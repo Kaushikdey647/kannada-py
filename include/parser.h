@@ -7,12 +7,12 @@
 // Function declarations for the parser
 
 typedef struct {
-    Token *tokens;
+    Token **tokens;
     int current;
     int length;
 } Parser;
 
-Parser *create_parser(Token *tokens, int length);
+Parser *create_parser(Token **tokens, int length);
 void free_parser(Parser *parser);
 
 ASTNode *parse_program(Parser *parser);

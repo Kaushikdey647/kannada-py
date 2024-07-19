@@ -4,6 +4,7 @@
         "common.h": "c",
         "compiler.h": "c",
         "parser.h": "c",
-        "semantic_analyzer.h": "c"
+        "semantic_analyzer.h": "c",
+        "stdlib.h": "c"
     }
 }
